@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+message User {
+    string id = 1;
+    string name = 2;
+}
+
+message Connect {
+    bool active = 1;
+    User  user = 2;
+}
+
+message Message {
+    string id = 1;
+    string content = 2;
+    string timestamp = 3;
+}
+
+message Close {}
+
+service ChatRoom {
+    rpc CreateStream(Connect) returns (stream Message);
+    rpc BroadcastMsg(Message) returns (Close);
+}
